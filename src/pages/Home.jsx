@@ -7,7 +7,7 @@ import { DataContext } from '../contexts/ContextData'
 
 export const Home = () => {
 
-    const [data, setData] = useState()
+    const [data, setData] = useState({})
 
     return (
         <DataContext.Provider value={{ data, setData }}>

@@ -1,15 +1,39 @@
 import styled from "styled-components"
 import { BsArrowUpCircle } from 'react-icons/bs'
+import { useEffect, useState } from "react"
 
-export const Control = (props) => {
+export const Control = ({ title, positive, negative, total }) => {
+
+    const [value, setValue] = useState(0)
+
+    useEffect(() => {
+        if(title === 'Entrada') {
+            let positive2 = positive.reduce((value, total) => {
+                return value + total
+            }, 0)
+            setValue(positive2)
+        } else if(title === 'Saída') {
+            let negative2 = negative.reduce((value, total) => {
+                return value + total
+            }, 0)
+            setValue(negative2)
+        } else {
+            let totalValues = total.reduce((value, total) => {
+                return value + total
+            }, 0)
+            setValue(totalValues)
+        }
+
+    }, [positive, negative, total])
+
     return (
         <BoxControl>
             <div className="box-control-header">
-                <h3>{props.title}</h3>
+                <h3>{title}</h3>
                 <BsArrowUpCircle size={25}/>
             </div>
             <div className="box-control-body">
-                <h2>R$ 1200.00</h2>
+                <h2>R$ {value}</h2>
             </div>
         </BoxControl>
     )
